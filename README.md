@@ -73,18 +73,36 @@ This repository includes implementations of the following experiments:
 
 ## 🚀 How to Run
 
-1. Clone the repository:
+### 1️⃣ Clone the Repository
 
-        git clone <your-repo-link>
-        cd <repo-folder>
+    git clone https://github.com/SajjadHossainSoykot/ICT-4102-Information-Coding-and-Transmission-Laboratory.git
+    cd ICT-4102-Information-Coding-and-Transmission-Laboratory
 
-2. Run Python scripts:
+### 2️⃣ (Optional) Create Virtual Environment
 
-        python filename.py
+    python -m venv venv
 
-3. Or open Jupyter Notebook:
+Activate environment:
 
-        jupyter notebook
+- On Windows:
+    
+        venv\Scripts\activate
+
+- On Linux/Mac:
+
+        source venv/bin/activate
+
+### 3️⃣ Install Required Libraries (if needed)
+
+    pip install numpy matplotlib
+
+### 4️⃣ Run Python Scripts
+
+    python filename.py
+
+### 5️⃣ Run Jupyter Notebooks
+
+    jupyter notebook
 
 ---
 
