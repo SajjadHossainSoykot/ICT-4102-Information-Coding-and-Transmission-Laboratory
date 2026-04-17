@@ -31,7 +31,7 @@ The course bridges theoretical knowledge with hands-on programming to build a so
 This repository includes implementations of the following experiments:
 
 1. **Communication Noise Analysis**  
-   - Study and simulation of common noise types in communication systems  
+   - Study and simulation of common noise types (Gaussian, Impulse, Thermal, Random)  
 
 2. **Random Noise Characteristics**  
    - Analysis using different mean and variance values  
@@ -54,6 +54,7 @@ This repository includes implementations of the following experiments:
 
 - 📓 Jupyter Notebook (`.ipynb`) files for experiments  
 - 💻 Python (`.py`) implementations  
+- 🧮 MATLAB (`.m`) implementations  
 - 📊 Graphs and simulation outputs  
 - 🧾 Algorithm explanations and theoretical insights  
 - 🔍 Step-by-step analysis of communication models  
@@ -64,6 +65,7 @@ This repository includes implementations of the following experiments:
 
 - **Python 3**  
 - **Jupyter Notebook**  
+- **MATLAB**  
 - Libraries such as:
   - NumPy  
   - Matplotlib  
@@ -78,7 +80,11 @@ This repository includes implementations of the following experiments:
     git clone https://github.com/SajjadHossainSoykot/ICT-4102-Information-Coding-and-Transmission-Laboratory.git
     cd ICT-4102-Information-Coding-and-Transmission-Laboratory
 
-### 2️⃣ (Optional) Create Virtual Environment
+---
+
+### ▶️ Run Python Code
+
+#### (Optional) Create Virtual Environment
 
     python -m venv venv
 
@@ -92,17 +98,26 @@ Activate environment:
 
         source venv/bin/activate
 
-### 3️⃣ Install Required Libraries (if needed)
+#### Install Required Libraries (if needed)
 
     pip install numpy matplotlib
 
-### 4️⃣ Run Python Scripts
+#### Run Python Scripts
 
     python filename.py
 
-### 5️⃣ Run Jupyter Notebooks
+#### Run Jupyter Notebooks
 
     jupyter notebook
+
+---
+
+### ▶️ Run MATLAB Code
+
+1. Open MATLAB  
+2. Navigate to the project folder  
+3. Open any `.m` file  
+4. Click **Run** or type the script name in the command window  
 
 ---
 
