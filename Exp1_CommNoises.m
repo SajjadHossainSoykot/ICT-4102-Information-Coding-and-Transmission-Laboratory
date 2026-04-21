@@ -8,11 +8,14 @@ t = linspace(0, 1, fs);        % Time vector
 freq = 5;                      % Frequency of sine wave
 clean_signal = sin(2*pi*freq*t);
 
-% 1. Gaussian Noise
-mean_val = 0;
-variance = 0.5;
-gaussian_noise = mean_val + sqrt(variance) * randn(1, fs);
-noisy_signal_gaussian = clean_signal + gaussian_noise;
+% 1. AWGN Noise
+snr_db = 10;                                   % Desired SNR in dB
+signal_power = mean(clean_signal.^2);          % Signal power
+snr_linear = 10^(snr_db / 10);                 % Convert dB to linear
+noise_power = signal_power / snr_linear;       % Noise power
+
+awgn_noise = sqrt(noise_power) * randn(1, fs); % AWGN samples
+noisy_signal_awgn = clean_signal + awgn_noise;
 
 % 2. Impulse Noise
 impulse_noise = zeros(1, fs);
@@ -42,8 +45,8 @@ ylabel('Amplitude');
 grid on;
 
 subplot(5,1,2);
-plot(t, noisy_signal_gaussian, 'LineWidth', 1.2);
-title('Noisy Signal with Gaussian Noise');
+plot(t, noisy_signal_awgn, 'LineWidth', 1.2);
+title('Noisy Signal with AWGN');
 xlabel('Time');
 ylabel('Amplitude');
 grid on;
@@ -70,12 +73,12 @@ ylabel('Amplitude');
 grid on;
 
 % SNR Calculation
-snr_gaussian = 10 * log10(var(clean_signal) / var(gaussian_noise));
-snr_impulse  = 10 * log10(var(clean_signal) / var(impulse_noise));
-snr_thermal  = 10 * log10(var(clean_signal) / var(thermal_noise));
-snr_random   = 10 * log10(var(clean_signal) / var(random_noise));
+snr_awgn    = 10 * log10(var(clean_signal) / var(awgn_noise));
+snr_impulse = 10 * log10(var(clean_signal) / var(impulse_noise));
+snr_thermal = 10 * log10(var(clean_signal) / var(thermal_noise));
+snr_random  = 10 * log10(var(clean_signal) / var(random_noise));
 
-fprintf('Signal-to-Noise Ratio (SNR) with Gaussian Noise: %.2f dB\n', snr_gaussian);
+fprintf('Signal-to-Noise Ratio (SNR) with AWGN: %.2f dB\n', snr_awgn);
 fprintf('Signal-to-Noise Ratio (SNR) with Impulse Noise: %.2f dB\n', snr_impulse);
 fprintf('Signal-to-Noise Ratio (SNR) with Thermal Noise: %.2f dB\n', snr_thermal);
 fprintf('Signal-to-Noise Ratio (SNR) with Random Noise: %.2f dB\n', snr_random);
