@@ -58,5 +58,8 @@ huffman_codes = generate_huffman_codes(root)
 
 # Step 6: Display the Huffman codes
 print("Huffman Codes:")
-for symbol, code in huffman_codes.items():
-    print(f"Symbol: {symbol}, Code: {code}")
+print("Symbol\tFrequency\tCode")
+
+for i in range(len(symbols)):
+    symbol = symbols[i]
+    print(f"{symbol}\t{frequencies[i]}\t\t{huffman_codes[symbol]}")
