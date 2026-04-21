@@ -1,27 +1,29 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Step 1: Define the binary entropy function H(p)
+# Binary entropy function
 def binary_entropy(p):
-    # Ensure p is not exactly 0 or 1 to avoid log(0) errors
-    p = np.clip(p, 1e-10, 1 - 1e-10)  # Clip to avoid exact 0 or 1 values
+    p = np.clip(p, 1e-10, 1 - 1e-10)
     return -p * np.log2(p) - (1 - p) * np.log2(1 - p)
 
-# Step 2: Define the channel capacity function
+# Channel capacity function
 def bsc_capacity(p):
     return 1 - binary_entropy(p)
 
-# Step 3: Input the probability of error p
+# Input
 p = float(input("Enter the probability of error (p) between 0 and 0.5: "))
 
-# Step 4: Calculate the channel capacity
+# Validation
+if p < 0 or p > 0.5:
+    raise ValueError("p must be between 0 and 0.5")
+
+# Calculation
 capacity = bsc_capacity(p)
 
-# Step 5: Display the result
 print(f"Channel Capacity of BSC with error probability {p}: {capacity:.4f} bits/channel use")
 
-# Plotting the channel capacity as a function of error probability p
-p_values = np.linspace(0, 0.5, 100)  # Error probability range from 0 to 0.5
+# Plot
+p_values = np.linspace(0, 0.5, 100)
 capacity_values = bsc_capacity(p_values)
 
 plt.plot(p_values, capacity_values, label="Channel Capacity")
