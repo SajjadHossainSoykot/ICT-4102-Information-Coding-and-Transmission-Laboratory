@@ -3,10 +3,10 @@ clear;
 close all;
 
 % Input probability of error
-p = input('Enter the probability of error (p) between 0 and 0.5: ');
+p = input('Enter the probability of error (p) between 0 and 1: ');
 
-if p < 0 || p > 0.5
-    error('p must be between 0 and 0.5');
+if p < 0 || p > 1
+    error('p must be between 0 and 1');
 end
 
 % Binary entropy function
@@ -18,7 +18,7 @@ capacity = 1 - binary_entropy(p);
 fprintf('Channel Capacity of BSC with error probability %.2f: %.4f bits/channel use\n', p, capacity);
 
 % Plot channel capacity
-p_values = linspace(0, 0.5, 100);
+p_values = linspace(0, 1, 100);
 capacity_values = 1 - binary_entropy(p_values);
 
 figure;

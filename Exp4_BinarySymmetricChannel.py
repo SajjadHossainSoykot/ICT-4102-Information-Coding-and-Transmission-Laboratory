@@ -11,11 +11,11 @@ def bsc_capacity(p):
     return 1 - binary_entropy(p)
 
 # Input
-p = float(input("Enter the probability of error (p) between 0 and 0.5: "))
+p = float(input("Enter the probability of error (p) between 0 and 1: "))
 
 # Validation
-if p < 0 or p > 0.5:
-    raise ValueError("p must be between 0 and 0.5")
+if p < 0 or p > 1:
+    raise ValueError("p must be between 0 and 1")
 
 # Calculation
 capacity = bsc_capacity(p)
@@ -23,7 +23,7 @@ capacity = bsc_capacity(p)
 print(f"Channel Capacity of BSC with error probability {p}: {capacity:.4f} bits/channel use")
 
 # Plot
-p_values = np.linspace(0, 0.5, 100)
+p_values = np.linspace(0, 1, 200)
 capacity_values = bsc_capacity(p_values)
 
 plt.plot(p_values, capacity_values, label="Channel Capacity")
