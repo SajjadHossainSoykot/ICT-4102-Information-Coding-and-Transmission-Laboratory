@@ -125,7 +125,9 @@ Activate environment:
 
 This project is licensed under the **MIT License**.  
 You are free to use, modify, and distribute the code with proper attribution.
+If you use this project, please provide visible attribution to the original repository.
 
+>https://github.com/SajjadHossainSoykot/ICT-4102-Information-Coding-and-Transmission-Laboratory
 ---
 
 ## ⚠️ Academic Disclaimer
