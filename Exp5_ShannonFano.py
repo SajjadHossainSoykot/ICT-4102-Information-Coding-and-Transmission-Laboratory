@@ -1,54 +1,58 @@
-# Shannon-Fano Coding Algorithm
-# Step 1: Define the Shannon-Fano function
+def shannon_fano_coding(data):
+    items = list(data.items())
 
-def shannon_fano(symbols, probabilities):
-    # Base case
-    if len(symbols) == 1:
-        return {symbols[0]: ''}
+    # Base case: only one symbol
+    if len(items) == 1:
+        return {items[0][0]: ""}
 
-    # Step 2: Sort symbols and probabilities in descending order
-    sorted_indices = sorted(range(len(probabilities)), key=lambda k: probabilities[k], reverse=True)
-    sorted_symbols = [symbols[i] for i in sorted_indices]
-    sorted_probabilities = [probabilities[i] for i in sorted_indices]
+    # Sort by probability in descending order
+    items.sort(key=lambda x: x[1], reverse=True)
 
-    # Step 3: Divide into two parts
-    total_probability = sum(sorted_probabilities)
-    cumulative_probability = 0
+    total = sum(prob for symbol, prob in items)
+    cumulative = 0
+    split_index = 0
 
-    for i in range(len(sorted_probabilities)):
-        cumulative_probability += sorted_probabilities[i]
-        if cumulative_probability >= total_probability / 2:
+    # Find split point
+    for i in range(len(items)):
+        cumulative += items[i][1]
+        if cumulative >= total / 2:
+            split_index = i
             break
 
-    left_symbols = sorted_symbols[:i+1]
-    left_probabilities = sorted_probabilities[:i+1]
-    right_symbols = sorted_symbols[i+1:]
-    right_probabilities = sorted_probabilities[i+1:]
+    # Divide into two groups
+    left_data = dict(items[:split_index + 1])
+    right_data = dict(items[split_index + 1:])
 
-    # Step 4: Assign codes recursively
-    code_dict = {}
+    # Recursive code assignment
+    codes = {}
 
-    for symbol, code in shannon_fano(left_symbols, left_probabilities).items():
-        code_dict[symbol] = '0' + code
+    left_codes = shannon_fano_coding(left_data)
+    for symbol in left_codes:
+        codes[symbol] = "0" + left_codes[symbol]
 
-    if right_symbols:
-        for symbol, code in shannon_fano(right_symbols, right_probabilities).items():
-            code_dict[symbol] = '1' + code
+    if right_data:
+        right_codes = shannon_fano_coding(right_data)
+        for symbol in right_codes:
+            codes[symbol] = "1" + right_codes[symbol]
 
-    return code_dict
+    return codes
 
 
-# Step 5: Input the symbols and their corresponding probabilities
-symbols = ['A', 'B', 'C', 'D', 'E']
-probabilities = [0.4, 0.3, 0.2, 0.05, 0.05]
+# Input data
+data = {
+    'A': 0.4,
+    'B': 0.3,
+    'C': 0.2,
+    'D': 0.05,
+    'E': 0.05
+}
 
-# Step 6: Call the Shannon-Fano function
-codes = shannon_fano(symbols, probabilities)
+# Generate codes
+codes = shannon_fano_coding(data)
 
-# Step 7: Display result
+# Display output
 print("Shannon-Fano Codes:")
 print("Symbol\tProbability\tCode")
 
-for i in range(len(symbols)):
-    symbol = symbols[i]
-    print(f"{symbol}\t{probabilities[i]}\t\t{codes[symbol]}")
+for symbol in data:
+    print(f"{symbol}\t{data[symbol]}\t\t{codes[symbol]}")
